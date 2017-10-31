@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>指定日期进行加减</title>
+</head>
+<body>
+<h2>指定日期进行加减</h2>	
+<p id="setXDate1"></p>
+<p id='setXDate2'></p>
+<script>
+	window.onload = function () {
+	
+		function dateFormat(){
+			Date.prototype.format = function(f){
+				var date = {
+					'Y': this.getFullYear(),
+					'M':(this.getMonth()+1),
+					'D':this.getDate(),
+					'h':this.getHours(),
+					'm':this.getMinutes(),
+					's':this.getSeconds()
+				}
+
+				for(var d in date){
+					var reg = new RegExp("["+d+"]{1,}",'g');
+					r = reg.test(f);
+
+					if(r){
+						var _d = date[d];
+						f = f.replace(reg,_d < 10 ? ('0'+_d):_d);
+					}
+				}
+				return f;
+			}
+		}
+
+		dateFormat();
+
+		function setXDate(date,xY,xM,xD,xh,xm,xs){
+			var xY = xY || 0,
+				xM = xM || 0,
+				xD = xD || 0,
+				xh = xh || 0,
+				xm = xm || 0,
+				xs = xs || 0;
+
+			if(xY){
+				date.setFullYear(date.getFullYear()+xY);
+			}
+
+			if(xM){
+				date.setMonth(date.getMonth()+xM);	
+			}	
+
+			if(xD){
+				date.setDate(date.getDate()+xD);
+			}
+
+			if(xh){
+				date.setDate(date.getHours()+xh);
+			}
+
+			if(xm){
+				date.setMinutes(date.getMinutes()+xm);
+			}
+
+			if(xs){
+				date.setSeconds(date.getSeconds()+xs);
+			}
+
+			return date.format("YYYY-MM-DD h:m:s");
+		}
+
+		function $(id){
+			return document.getElementById(id);
+		}
+
+		$('setXDate1').innerHTML = '获取当前日期，增加七天 : ' + setXDate(new Date(),0,0,7)
+		$('setXDate2').innerHTML = '获取当前日期，增加七年 : ' + setXDate(new Date(),7)
+
+	}
+</script>
+</body>
+</html>

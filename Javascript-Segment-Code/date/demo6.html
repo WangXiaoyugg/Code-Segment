@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>获取短日期格式</title>
+</head>
+<body>
+	<h2>获取短日期格式--即年、月、日</h2>
+	<p id="getMinDate">短日期: </p>
+<script>
+	window.onload = function () {
+		
+		function dateFormat(){
+			Date.prototype.format = function(f){
+				var date = {
+					'Y': this.getFullYear(),
+					'M':(this.getMonth()+1),
+					'D':this.getDate(),
+					'h':this.getHours(),
+					'm':this.getMinutes(),
+					's':this.getSeconds()
+				}
+
+				for(var d in date){
+					var reg = new RegExp("["+d+"]{1,}",'g');
+					r = reg.test(f);
+
+					if(r){
+						var _d = date[d];
+						f = f.replace(reg,_d < 10 ? ('0'+_d):_d);
+					}
+				}
+				return f;
+			}
+		}
+
+		dateFormat();
+
+		function getMinDate(){
+			return new Date().format('YYYY-MM-DD');
+		}
+
+		document.getElementById('getMinDate').innerHTML = getMinDate();
+	}
+
+
+</script>	
+</body>
+</html>

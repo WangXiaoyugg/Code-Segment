@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>倒计时</title>
+</head>
+<body>
+<p id="getCountDown"></p>
+<p id="LabourDay"></p>
+<p id="NationalDay"></p>
+<script>
+	window.onload = function () {
+		function getCountDown(Y,M,D,h,m,s){
+			var Y = Y || 0,
+				M = M || 0,
+				D = D || 0,
+				h = h || 0,
+				m = m || 0,
+				s = s || 0;
+			var date = new Date(Y,M-1,D,h,m,s);
+			var times = date.getTime() - new Date().getTime();
+			return Math.ceil(times /(1000 * 60 * 60 * 24));	//返回天数
+		}
+
+		function $(id){
+			return document.getElementById(id);	
+		}
+
+		$('getCountDown').innerHTML = '2018-1-1 距离现在还有 '+getCountDown(2018,1,1) + ' 天';
+		$('LabourDay').innerHTML = '2018-5-1 距离现在还有 '+getCountDown(2018,5,1) + ' 天';
+		$('NationalDay').innerHTML = '2018-10-1 距离现在还有 '+getCountDown(2018,10,1) + ' 天';
+
+	}
+</script>
+</body>
+</html>

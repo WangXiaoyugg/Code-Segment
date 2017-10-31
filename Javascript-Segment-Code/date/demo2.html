@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>显示当前时间</title>
+</head>
+<body>
+<div id="nowTime"></div>
+<script>
+	window.onload = function () {
+
+		function getNowTime(){
+			var date = new Date();
+			return date.getFullYear() + '年'+ (date.getUTCMonth()+1)+'月'
+			+ date.getDate()+'日'+ ' '+ date.getHours()+'时'+ date.getMinutes()+'分'+date.getSeconds()+'秒';	
+		}
+
+		document.getElementById('nowTime').innerHTML = '时间: '+ getNowTime();
+			
+	}
+</script>		
+</body>
+</html>

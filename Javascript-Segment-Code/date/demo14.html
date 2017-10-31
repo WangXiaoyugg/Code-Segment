@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>判断润年还是平年</title>
+</head>
+<body>
+<h2>判断润年还是平年</h2>
+<p id="year1"></p>
+<p id="year2"></p>	
+<p id="year3"></p>	
+<script>
+	//判断某年的二月有多少天
+	window.onload = function () {
+		
+		function dateFormat(){
+			Date.prototype.format = function(f){
+				var date = {
+					'Y': this.getFullYear(),
+					'M':(this.getMonth()+1),
+					'D':this.getDate(),
+					'h':this.getHours(),
+					'm':this.getMinutes(),
+					's':this.getSeconds()
+				}
+
+				for(var d in date){
+					var reg = new RegExp("["+d+"]{1,}",'g');
+					r = reg.test(f);
+
+					if(r){
+						var _d = date[d];
+						f = f.replace(reg,_d < 10 ? ('0'+_d):_d);
+					}
+				}
+				return f;
+			}
+		}
+
+		dateFormat();
+
+		function getMonthDays(Y,M){
+			return new Date(Y,M,0).getDate();
+		}
+
+		function getYearType(Y){
+			return getMonthDays(Y,2) === 28 ? '平年':'闰年'
+		}
+
+		function $(id){
+			return document.getElementById(id);
+		}
+
+		$('year1').innerHTML = '2016年是 ' + getYearType(2016);
+		$('year2').innerHTML = '2017年是 ' + getYearType(2017);
+		$('year3').innerHTML = '2018年是 ' + getYearType(2018);
+
+	}
+</script>
+</body>
+</html>

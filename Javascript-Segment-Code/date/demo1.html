@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>获取日期的指定部分</title>
+</head>
+<body>
+<script>
+	window.onload = function () {
+		var d = new Date();
+		console.log(d.getFullYear()+'年');
+		console.log(d.getMonth()+1+'月');
+		console.log(d.getDate()+'日');
+		console.log(d.getHours()+'时');
+		console.log(d.getMinutes()+'分');
+		console.log(d.getSeconds()+'秒');
+		var today = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
+		document.write(today);
+	}
+</script>	
+</body>
+</html>

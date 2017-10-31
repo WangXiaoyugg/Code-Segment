@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>将日期格式化成字符串</title>
+</head>
+<body>
+	<h2>日期格式化成字符串</h2>
+	<p id="formatTime1">格式化日期1:</p>
+	<p id='formatTime2'>格式化日期2:</p>
+	<p id="formatTime3">格式化日期3:</p>
+<script>
+	window.onload = function () {
+		
+
+		//要复习多看
+		function dateFormat(){
+
+			Date.prototype.format = function(f)	{
+				var date = {
+					"Y": this.getFullYear(),
+					"M": (this.getMonth()+1),
+					"D":this.getDate(),
+					"h":this.getHours(),
+					"m":this.getMinutes(),
+					"s":this.getSeconds()
+				}
+
+
+				for(var d in date){
+					var	reg = new RegExp("["+d+"]{1,}",'g');// /[Y]{1,}/g
+						r = reg.test(f); // /[Y]{1,}/.test('YYYY-MM-DD h:m:s');
+
+					if(r){
+						var _d = date[d];//2017
+						f = f.replace(reg,_d < 10 ? ("0"+_d):_d);
+					}
+				}
+
+				return f;
+			};
+
+		}
+
+		var d = new Date();
+		dateFormat();
+		document.getElementById('formatTime1').innerHTML = '格式化日期1: '+d.format("YYYY-MM-DD h:m:s");
+		document.getElementById('formatTime2').innerHTML = '格式化日期2: '+d.format("YYYY/MM/DD h-m-s");
+		document.getElementById('formatTime3').innerHTML = '格式化日期1: '+d.format("Y:M:D h:m:s");
+
+	}
+</script>	
+</body>
+</html>

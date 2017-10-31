@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>h获取指定日期所在月份的天数</title>
+<script>
+	window.onload = function () {
+		
+		function dateFormat(){
+
+			Date.prototype.format = function(f){
+				var date = {
+					'Y':this.getFullYear(),
+					'M':(this.getMonth()+1),
+					'D':this.getDate(),
+					'h':this.getHours(),
+					'm':this.getMinutes(),
+					's':this.getSeconds()
+				}
+
+				for(var d in date){
+					var reg = new RegExp("["+d+"]{1,}","g");
+					var r = reg.test(f)
+					
+					if(r){
+						var _d = date[d];
+						f = f.replace(reg,_d < 10 ? ('0'+_d) :_d );
+					}
+				}
+			}
+		};
+
+		dateFormat();
+
+		function getMonthDays(Y,M){
+			//设置为0指的是M月的最后一天
+			return new Date(Y,M,0).getDate();
+		}	
+
+		function $(id){
+			return document.getElementById(id);	
+		}
+
+		$('Month1').innerHTML = '2017-01 ' + getMonthDays(2017,1) + ' 天';
+		$('Month2').innerHTML = '2017-02 ' + getMonthDays(2017,2) + ' 天';		
+		$('Month3').innerHTML = '2017-03 ' + getMonthDays(2017,3) + ' 天';		
+		$('Month4').innerHTML = '2017-04 ' + getMonthDays(2017,4) + ' 天';		
+
+	}
+</script>
+</head>
+<body>
+<h2>h获取指定日期所在月份的天数</h2>
+<p id="Month1"></p>
+<p id="Month2"></p>
+<p id="Month3"></p>
+<p id="Month4"></p>
+
+</body>
+</html>

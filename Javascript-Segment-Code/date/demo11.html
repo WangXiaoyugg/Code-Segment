@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>比较日期大小</title>
+</head>
+<body>
+<h2>比较日期大小</h2>
+<p id="getDateSize1"></p>
+<p id="getDateSize2"></p>
+<script>
+	window.onload = function () {
+		function getDateDifferenceValue(date1,date2){
+			var d1 = new Date(date1.Y || 0,(date1.M-1)||0,date1.D || 0,date1.h || 0,date1.m || 0,date1.s ||0).getTime();
+			var d2 = new Date(date2.Y || 0,(date2.M-1)||0,date2.D || 0,date2.h || 0,date2.m || 0,date2.s ||0).getTime();
+			return (d1-d2)/1000;	
+		}
+
+		function getDataSize(date1,date2){
+			return getDateDifferenceValue(date1,date2) > 0 ? true:false;
+		}
+
+		function $(id){
+			return document.getElementById(id);
+		}
+
+		$('getDateSize1').innerHTML = '2017-10-31 比 2017-10-30 :'+
+		(getDataSize({Y:2017,M:10,D:31},{Y:2017,M:10,D:30})? "大":"小");
+
+		$('getDateSize2').innerHTML = '2017-10-31 比 2017-11-1 :'+
+		(getDataSize({Y:2017,M:10,D:31},{Y:2017,M:11,D:30})? "大":"小");
+
+	}
+
+
+</script>
+</body>
+</html>
